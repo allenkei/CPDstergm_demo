@@ -16,7 +16,7 @@ network_stats=c("edges", "mutual")
 result1 <- g_result1 <- ker_result1 <- g_stats_result1 <- ker_stats_result1 <- matrix(NA, nrow=3, ncol=4)
 for(i in 1:length(num_node)){
   set.seed(1)
-  SBM_list <- sim_SBM_list(num_nets=10, n=num_node[i], rho=0.0)
+  SBM_list <- sim_SBM_list(num_seq=10, n=num_node[i], rho=0.0)
   
   sim_result <- CPD_STERGM_list(SBM_list, directed=TRUE, network_stats)
   result1[i,] <- colMeans(sim_result)
@@ -39,7 +39,7 @@ for(i in 1:length(num_node)){
 result2 <- g_result2 <- ker_result2 <- g_stats_result2 <- ker_stats_result2 <- matrix(NA, nrow=3, ncol=4)
 for(i in 1:length(num_node)){
   set.seed(1)
-  SBM_list <- sim_SBM_list(num_nets=10, n=num_node[i], rho=0.5)
+  SBM_list <- sim_SBM_list(num_seq=10, n=num_node[i], rho=0.5)
   
   sim_result <- CPD_STERGM_list(SBM_list, directed=TRUE, network_stats)
   result2[i,] <- colMeans(sim_result)
@@ -62,7 +62,7 @@ for(i in 1:length(num_node)){
 result3 <- g_result3 <- ker_result3 <- g_stats_result3 <- ker_stats_result3 <- matrix(NA, nrow=3, ncol=4)
 for(i in 1:length(num_node)){
   set.seed(1)
-  SBM_list <- sim_SBM_list(num_nets=10, n=num_node[i], rho=0.9)
+  SBM_list <- sim_SBM_list(num_seq=10, n=num_node[i], rho=0.9)
   
   sim_result <- CPD_STERGM_list(SBM_list, directed=TRUE, network_stats)
   result3[i,] <- colMeans(sim_result)
@@ -96,7 +96,7 @@ coefs_neg <- matrix(c( -1, -1, -1, -1, -2, -1, -2, -1), nrow=2, ncol=4, byrow = 
 result1 <- g_result1 <- ker_result1 <- g_stats_result1 <- ker_stats_result1 <- matrix(NA, nrow=3, ncol=4)
 for(i in 1:length(num_node)){
   set.seed(1)
-  STERGM_list <- sim_STERGM_list(num_nets=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
+  STERGM_list <- sim_STERGM_list(num_seq=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
   
   sim_result <- CPD_STERGM_list(STERGM_list, directed=TRUE, network_stats)
   result1[i,] <- colMeans(sim_result)
@@ -135,7 +135,7 @@ coefs_neg <- matrix(c( -1,  2,    -1,  2,
 result2 <- g_result2 <- ker_result2 <- g_stats_result2 <- ker_stats_result2 <- matrix(NA, nrow=3, ncol=4)
 for(i in 1:length(num_node)){
   set.seed(1)
-  STERGM_list <- sim_STERGM_list(num_nets=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
+  STERGM_list <- sim_STERGM_list(num_seq=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
   
   sim_result <- CPD_STERGM_list(STERGM_list, directed=TRUE, network_stats)
   result2[i,] <- colMeans(sim_result)
@@ -176,7 +176,7 @@ result3 <- g_result3 <- ker_result3 <- g_stats_result3 <- ker_stats_result3 <- m
 for(i in 1:length(num_node)){
   set.seed(1)
   gender <- c(c("M", "F")[rbinom(num_node[i], 1, 0.5) + 1]) # fixed
-  STERGM_list <- sim_STERGM_list(num_nets=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i], node_attr=gender)
+  STERGM_list <- sim_STERGM_list(num_seq=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i], node_attr=gender)
   
   sim_result <- CPD_STERGM_list(STERGM_list, directed=TRUE, network_stats, node_attr=gender)
   result3[i,] <- colMeans(sim_result)
