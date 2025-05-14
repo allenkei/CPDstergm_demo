@@ -5,11 +5,10 @@ library(CPDstergm)
 source("EVAL.R")
 
 
-
-
 ######################
 # Simulation 1 (SBM) #
 ######################
+
 
 num_node <- c(50, 100, 200)
 network_stats=c("edges", "mutual")
@@ -18,6 +17,7 @@ network_stats=c("edges", "mutual")
 ##################
 # SBM, rho = 0.0 #
 ##################
+
 
 result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result1 <- ker_result1 <- g_stats_result1 <- ker_stats_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
@@ -59,6 +59,7 @@ for(i in 1:length(num_node)){
 # SBM, rho = 0.5 #
 ##################
 
+
 result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result2 <- ker_result2 <- g_stats_result2 <- ker_stats_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 rdpg_result2 <- nbs_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
@@ -95,10 +96,10 @@ for(i in 1:length(num_node)){
 #save(df, file = 'SBMrho05.Rdata')
 
 
-
 ##################
 # SBM, rho = 0.9 #
 ##################
+
 
 result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result3 <- ker_result3 <- g_stats_result3 <- ker_stats_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
@@ -132,10 +133,8 @@ for(i in 1:length(num_node)){
 }
 
 
-
 #df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, rdpg_result3, nbs_result3)
 #save(df, file = 'SBMrho09.Rdata')
-
 
 
 #########################
@@ -147,6 +146,7 @@ for(i in 1:length(num_node)){
 # STERGM, p = 4 #
 #################
 
+
 num_node <- c(50, 100, 200)
 y1_target <- c(250, 500, 1000)
 network_stats=c("edges", "mutual")
@@ -157,6 +157,7 @@ coefs_neg <- matrix(c( -1, -1, -1, -1, -2, -1, -2, -1), nrow=2, ncol=4, byrow = 
 result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result1 <- ker_result1 <- g_stats_result1 <- ker_stats_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 rdpg_result1 <- nbs_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
+
 
 for(i in 1:length(num_node)){
   set.seed(1)
@@ -189,10 +190,10 @@ for(i in 1:length(num_node)){
 #save(df, file = 'STERGMp4.Rdata')
 
 
-
 #################
 # STERGM, p = 6 #
 #################
+
 
 num_node <- c(50, 100, 200)
 y1_target <- c(500, 1400, 2500)
@@ -211,6 +212,7 @@ coefs_neg <- matrix(c( -1,  2,    -1,  2,
 result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result2 <- ker_result2 <- g_stats_result2 <- ker_stats_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 rdpg_result2 <- nbs_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
+
 
 for(i in 1:length(num_node)){
   set.seed(1)
@@ -241,7 +243,6 @@ for(i in 1:length(num_node)){
 
 #df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, rdpg_result2, nbs_result2)
 #save(df, file = 'STERGMp6.Rdata')
-
 
 
 #########
@@ -302,15 +303,6 @@ for(i in 1:length(num_node)){
 #save(df, file = 'STERGMp8.Rdata')
 
 
-
-
-
-
-
-
-
-
-
 ########################
 # Simulation 3 (RDPGM) #
 ########################
@@ -357,8 +349,6 @@ for(i in 1:length(num_node)){
 }
 
 
-
-
 #df <- list(result1, g_result1, ker_result1, g_stats_result1, ker_stats_result1, rdpg_result1, nbs_result1)
 #save(df, file = 'RDPGd05.Rdata')
 
@@ -368,12 +358,9 @@ for(i in 1:length(num_node)){
 #################
 
 
-
 result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result2 <- ker_result2 <- g_stats_result2 <- ker_stats_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 rdpg_result2 <- nbs_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
-
-
 
 
 for(i in 1:length(num_node)){
@@ -403,10 +390,8 @@ for(i in 1:length(num_node)){
 }
 
 
-
 #df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, rdpg_result2, nbs_result2)
 #save(df, file = 'RDPGd10.Rdata')
-
 
 
 #################
@@ -417,7 +402,6 @@ for(i in 1:length(num_node)){
 result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result3 <- ker_result3 <- g_stats_result3 <- ker_stats_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 rdpg_result3 <- nbs_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
-
 
 
 for(i in 1:length(num_node)){
