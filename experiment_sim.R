@@ -15,9 +15,9 @@ num_node <- c(50, 100, 200)
 network_stats=c("edges", "mutual")
 
 
-#############
-# rho = 0.0 #
-#############
+##################
+# SBM, rho = 0.0 #
+##################
 
 result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result1 <- ker_result1 <- g_stats_result1 <- ker_stats_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
@@ -55,9 +55,9 @@ for(i in 1:length(num_node)){
 #save(df, file = 'SBMrho00.Rdata')
 
 
-#############
-# rho = 0.5 #
-#############
+##################
+# SBM, rho = 0.5 #
+##################
 
 result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result2 <- ker_result2 <- g_stats_result2 <- ker_stats_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
@@ -96,9 +96,9 @@ for(i in 1:length(num_node)){
 
 
 
-#############
-# rho = 0.9 #
-#############
+##################
+# SBM, rho = 0.9 #
+##################
 
 result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 g_result3 <- ker_result3 <- g_stats_result3 <- ker_stats_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
@@ -143,12 +143,12 @@ for(i in 1:length(num_node)){
 #########################
 
 
-#########
-# p = 4 #
-#########
+#################
+# STERGM, p = 4 #
+#################
 
-num_node <- c(50,100)
-y1_target <- c(250,500)
+num_node <- c(50, 100, 200)
+y1_target <- c(250, 500, 1000)
 network_stats=c("edges", "mutual")
 coefs_pos <- matrix(c(-1, -1, -1, -1, -2, 1, -2, 1), nrow=2, ncol=4, byrow = T)
 coefs_neg <- matrix(c( -1, -1, -1, -1, -2, -1, -2, -1), nrow=2, ncol=4, byrow = T)
@@ -190,12 +190,12 @@ for(i in 1:length(num_node)){
 
 
 
-#########
-# p = 6 #
-#########
+#################
+# STERGM, p = 6 #
+#################
 
-num_node <- c(50,100)
-y1_target <- c(500,1400)
+num_node <- c(50, 100, 200)
+y1_target <- c(500, 1400, 2500)
 network_stats=c("edges", "mutual", "triangles")
 coefs_pos <- matrix(c(-2, -1.5, -2, -1.5,
                        2,  1,    2,  1,
@@ -249,8 +249,8 @@ for(i in 1:length(num_node)){
 #########
 
 
-num_node <- c(50,100)
-y1_target <- c(500,1400)
+num_node <- c(50, 100, 200)
+y1_target <- c(500, 1400, 2500)
 network_stats <- c("edges", "mutual", "triangles", "nodematch(\"Gender\")")
 coefs_pos <- matrix(c(-2, -1.5, -2, -1.5,
                        2,  1,    2,  1,
@@ -320,9 +320,9 @@ num_node <- c(50, 100, 200)
 network_stats=c("edges", "mutual")
 
 
-#########
-# d = 5 #
-#########
+################
+# RDPGM, d = 5 #
+################
 
 
 result1 <- matrix(NA, nrow=length(num_node), ncol=4)
@@ -363,9 +363,9 @@ for(i in 1:length(num_node)){
 #save(df, file = 'RDPGd05.Rdata')
 
 
-#########
-# d = 10 #
-#########
+#################
+# RDPGM, d = 10 #
+#################
 
 
 
@@ -409,9 +409,9 @@ for(i in 1:length(num_node)){
 
 
 
-#########
-# d = 15 #
-#########
+#################
+# RDPGM, d = 15 #
+#################
 
 
 result3 <- matrix(NA, nrow=length(num_node), ncol=4)
