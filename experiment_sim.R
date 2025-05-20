@@ -1,6 +1,6 @@
 
-library(devtools)
-install_github("allenkei/CPDstergm", force = TRUE)
+#library(devtools)
+#install_github("allenkei/CPDstergm", force = TRUE)
 library(CPDstergm)
 source("EVAL.R")
 
@@ -51,7 +51,7 @@ for(i in 1:length(num_node)){
 }
 
 
-#df <- list(result1, g_result1, ker_result1, g_stats_result1, ker_stats_result1, rdpg_result1, nbs_result1)
+df <- list(result1, g_result1, ker_result1, g_stats_result1, ker_stats_result1, rdpg_result1, nbs_result1)
 #save(df, file = 'SBMrho00.Rdata')
 
 
@@ -92,7 +92,7 @@ for(i in 1:length(num_node)){
 }
 
 
-#df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, rdpg_result2, nbs_result2)
+df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, rdpg_result2, nbs_result2)
 #save(df, file = 'SBMrho05.Rdata')
 
 
@@ -133,7 +133,7 @@ for(i in 1:length(num_node)){
 }
 
 
-#df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, rdpg_result3, nbs_result3)
+df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, rdpg_result3, nbs_result3)
 #save(df, file = 'SBMrho09.Rdata')
 
 
@@ -186,7 +186,7 @@ for(i in 1:length(num_node)){
 }
 
 
-#df <- list(result1, g_result1, ker_result1, g_stats_result1, ker_stats_result1, rdpg_result1, nbs_result1)
+df <- list(result1, g_result1, ker_result1, g_stats_result1, ker_stats_result1, rdpg_result1, nbs_result1)
 #save(df, file = 'STERGMp4.Rdata')
 
 
@@ -241,13 +241,13 @@ for(i in 1:length(num_node)){
 }
 
 
-#df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, rdpg_result2, nbs_result2)
+df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, rdpg_result2, nbs_result2)
 #save(df, file = 'STERGMp6.Rdata')
 
 
-#########
-# p = 8 #
-#########
+#################
+# STERGM, p = 8 #
+#################
 
 
 num_node <- c(50, 100, 200)
@@ -299,7 +299,7 @@ for(i in 1:length(num_node)){
 }
 
 
-#df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, rdpg_result3, nbs_result3)
+df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, rdpg_result3, nbs_result3)
 #save(df, file = 'STERGMp8.Rdata')
 
 
@@ -308,13 +308,14 @@ for(i in 1:length(num_node)){
 ########################
 
 
+source("EVAL.R")
 num_node <- c(50, 100, 200)
 network_stats=c("edges", "mutual")
 
 
-################
-# RDPGM, d = 5 #
-################
+#################
+# RDPGM, d = 10 #
+#################
 
 
 result1 <- matrix(NA, nrow=length(num_node), ncol=4)
@@ -324,37 +325,37 @@ rdpg_result1 <- nbs_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 5)
+  RDPG_list <- sim_RDPG_list_test(num_seq = 10, n = num_node[i], rho = 0.9, d = 10)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result1[i,] <- colMeans(sim_result)
   
   sim_result <- Evaluation_gSeg(RDPG_list, p_threshold=0.05)
   g_result1[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_kerSeg(RDPG_list, p_threshold=0.001)
   ker_result1[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_gSeg_on_stats(RDPG_list, p_threshold=0.05, num_stats=length(network_stats))
   g_stats_result1[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_kerSeg_on_stats(RDPG_list, p_threshold=0.001, num_stats=length(network_stats))
   ker_stats_result1[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5)
   rdpg_result1[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_NBS(RDPG_list, M=15, delta=5)
   nbs_result1[i,] <- colMeans(sim_result)
 }
 
 
-#df <- list(result1, g_result1, ker_result1, g_stats_result1, ker_stats_result1, rdpg_result1, nbs_result1)
-#save(df, file = 'RDPGd05.Rdata')
+df <- list(result1, g_result1, ker_result1, g_stats_result1, ker_stats_result1, rdpg_result1, nbs_result1)
+save(df, file = 'RDPGd10.Rdata')
 
 
 #################
-# RDPGM, d = 10 #
+# RDPGM, d = 15 #
 #################
 
 
@@ -365,37 +366,37 @@ rdpg_result2 <- nbs_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 10)
+  RDPG_list <- sim_RDPG_list_test(num_seq = 10, n = num_node[i], rho = 0.9, d = 15)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result2[i,] <- colMeans(sim_result)
   
   sim_result <- Evaluation_gSeg(RDPG_list, p_threshold=0.05)
   g_result2[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_kerSeg(RDPG_list, p_threshold=0.001)
   ker_result2[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_gSeg_on_stats(RDPG_list, p_threshold=0.05, num_stats=length(network_stats))
   g_stats_result2[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_kerSeg_on_stats(RDPG_list, p_threshold=0.001, num_stats=length(network_stats))
   ker_stats_result2[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5)
   rdpg_result2[i,] <- colMeans(sim_result)
-  
+
   sim_result <- Evaluation_NBS(RDPG_list, M=15, delta=5)
   nbs_result2[i,] <- colMeans(sim_result)
 }
 
 
-#df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, rdpg_result2, nbs_result2)
-#save(df, file = 'RDPGd10.Rdata')
+df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, rdpg_result2, nbs_result2)
+#save(df, file = 'RDPGd15.Rdata')
 
 
 #################
-# RDPGM, d = 15 #
+# RDPGM, d = 20 #
 #################
 
 
@@ -406,7 +407,7 @@ rdpg_result3 <- nbs_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 15)
+  RDPG_list <- sim_RDPG_list_test(num_seq = 10, n = num_node[i], rho = 0.9, d = 20)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result3[i,] <- colMeans(sim_result)
@@ -431,6 +432,6 @@ for(i in 1:length(num_node)){
 }
 
 
-#df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, rdpg_result3, nbs_result3)
-#save(df, file = 'RDPGd15.Rdata')
+df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, rdpg_result3, nbs_result3)
+#save(df, file = 'RDPGd20.Rdata')
 
