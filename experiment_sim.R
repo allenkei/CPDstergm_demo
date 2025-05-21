@@ -325,7 +325,7 @@ rdpg_result1 <- nbs_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list_test(num_seq = 10, n = num_node[i], rho = 0.9, d = 10)
+  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 10)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result1[i,] <- colMeans(sim_result)
@@ -366,7 +366,7 @@ rdpg_result2 <- nbs_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list_test(num_seq = 10, n = num_node[i], rho = 0.9, d = 15)
+  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 15)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result2[i,] <- colMeans(sim_result)
@@ -407,7 +407,7 @@ rdpg_result3 <- nbs_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list_test(num_seq = 10, n = num_node[i], rho = 0.9, d = 20)
+  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 20)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result3[i,] <- colMeans(sim_result)
