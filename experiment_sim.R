@@ -1,6 +1,6 @@
 
-#library(devtools)
-#install_github("allenkei/CPDstergm", force = TRUE)
+library(devtools)
+install_github("allenkei/CPDstergm", force = TRUE)
 library(CPDstergm)
 source("EVAL.R")
 
