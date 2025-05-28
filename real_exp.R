@@ -13,19 +13,16 @@ source("EVAL.R")
 data("MITphone")
 
 
-
 node_degree <- rep(0, dim(MITphone[[1]])[1])
 for (t in seq_len(length(MITphone))) {
   mat <- MITphone[[t]]
   node_degree <- node_degree + rowSums(mat)
-}
-
-degree_median <- median(node_degree)
-node_status <- ifelse(node_degree > degree_median, "A", "N")
+}; rm(mat)
+node_status <- ifelse(node_degree > median(node_degree), "A", "N")
 
 
-result <- CPD_STERGM(MITphone, directed=FALSE, network_stats=c("edges", "isolates", "triangles", "nodematch(\"Gender\")"), 
-                     node_attr=node_status, list_of_lambda=10^c(0:4))
+result <- CPD_STERGM(MITphone, directed=FALSE, network_stats=c("edges", "isolates", "triangles", "nodematch(\"node_attr\")"), 
+                     node_attr=node_status, list_of_lambda=10^c(0:4), threshold_alpha=0.025)
 
 
 gSeg_result <- Evaluation_gSeg_on_stats(MITphone, p_threshold=0.05, num_stats=3, is_experiment=TRUE)
@@ -83,7 +80,7 @@ text(par("usr")[1]+1, 0.45, labels='gSeg', pos=2, xpd=TRUE, cex=0.8)
 
 
 df <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result)
-#save(df, file = 'MITphone_result.Rdata')
+#save(df, file = 'MITphone_result.Rdata') # Saved figure: 8 by 5
 
 
 
@@ -113,7 +110,8 @@ for(i in 1:length(date_range)){
 }
 
 
-result <- CPD_STERGM(df, directed=FALSE, network_stats=c("edges", "triangles"), list_of_lambda=10^c(0:4))
+result <- CPD_STERGM(df, directed=FALSE, network_stats=c("edges", "triangles"), 
+                     list_of_lambda=10^c(0:4), threshold_alpha=0.025)
 
 # Use network stat has no CP for gSeg and kerSeg
 gSeg_result <- Evaluation_gSeg(df, p_threshold=0.001, is_experiment=TRUE)
@@ -159,7 +157,7 @@ text(par("usr")[1]+1, 0.45, labels='gSeg', pos=2, xpd=TRUE, cex=0.8)
 
 
 df <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result)
-#save(df, file = 'Stock_result.Rdata')
+#save(df, file = 'Stock_result.Rdata') # Saved figure: 8 by 5
 
 
 

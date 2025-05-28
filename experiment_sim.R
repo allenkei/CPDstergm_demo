@@ -252,7 +252,7 @@ df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, 
 
 num_node <- c(50, 100, 200)
 y1_target <- c(500, 1400, 2500)
-network_stats <- c("edges", "mutual", "triangles", "nodematch(\"Gender\")")
+network_stats <- c("edges", "mutual", "triangles", "nodematch(\"node_attr\")")
 coefs_pos <- matrix(c(-2, -1.5, -2, -1.5,
                        2,  1,    2,  1,
                       -2, -1,   -2, -1,
