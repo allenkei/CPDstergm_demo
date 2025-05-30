@@ -18,7 +18,7 @@ for (t in seq_len(length(MITphone))) {
   mat <- MITphone[[t]]
   node_degree <- node_degree + rowSums(mat)
 }; rm(mat)
-node_status <- ifelse(node_degree > median(node_degree), "A", "N")
+node_status <- ifelse(node_degree > median(node_degree), "H", "L")
 
 
 result <- CPD_STERGM(MITphone, directed=FALSE, network_stats=c("edges", "isolates", "triangles", "nodematch(\"node_attr\")"), 
