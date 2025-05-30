@@ -114,7 +114,7 @@ for (t in seq_len(length(df))) {
   mat <- df[[t]]
   node_degree <- node_degree + rowSums(mat)
 }; rm(mat)
-node_status <- ifelse(node_degree > median(node_degree), "H", "L")
+node_status <- ifelse(node_degree > median(node_degree), "H", "M")
 
 
 result <- CPD_STERGM(df, directed=FALSE, network_stats=c("edges", "triangles", "nodematch(\"node_attr\")"), 
