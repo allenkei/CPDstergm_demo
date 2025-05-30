@@ -37,11 +37,11 @@ seq_date <- seq(as.Date("2004-09-15"), as.Date("2005-05-04"), by="days"); tau <-
 
 par(mar=c(4, 4, 2, 1), fig=c(0,1,0,0.66))
 plot(1:length(theta_change), theta_change, type='l',ylab="", xlab="", xaxt="n", yaxt="n")
+title(ylab="Change magnitude")
 abline(h = threshold, col='red',lwd=2)
 
 # winter and spring vacation (duration): seq_date[95];seq_date[110];seq_date[188];seq_date[192]
 win_spr_break <- c(95,110,188,192)
-
 for(i in c(1,3)){
   rect(xleft = win_spr_break[i]-2, xright = win_spr_break[i+1]-2, ybottom = par("usr")[3], ytop = par("usr")[4], 
        border = NA, col = adjustcolor("grey", alpha = 0.4))
@@ -79,8 +79,8 @@ text(par("usr")[1]+1, 0.45, labels='gSeg', pos=2, xpd=TRUE, cex=0.8)
 
 
 
-df <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result)
-#save(df, file = 'MITphone_result.Rdata') # Saved figure: 8 by 5
+MIT_result <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result)
+#save(MIT_result, file = 'MITphone_result.Rdata') # Saved figure: 8 by 5
 
 
 
@@ -99,7 +99,6 @@ rownames(market) <- date_vec
 start <- which(date_vec == '2007-01-01')
 end <- which(date_vec == '2010-01-04')
 date_range <- start:end
-mydata <- array(NA,c(29, 29, length(date_range)))
 df <- list()
 
 for(i in 1:length(date_range)){
@@ -107,13 +106,21 @@ for(i in 1:length(date_range)){
   temp <- ifelse(cor(temp)< 0, 1, 0)
   diag(temp) <- 0
   df[[i]] <- temp
-}
+}; rm(DJIA, temp)
 
 
-result <- CPD_STERGM(df, directed=FALSE, network_stats=c("edges", "triangles"), 
-                     list_of_lambda=10^c(0:4), threshold_alpha=0.025)
+node_degree <- rep(0, dim(df[[1]])[1])
+for (t in seq_len(length(df))) {
+  mat <- df[[t]]
+  node_degree <- node_degree + rowSums(mat)
+}; rm(mat)
+node_status <- ifelse(node_degree > median(node_degree), "H", "L")
 
-# Use network stat has no CP for gSeg and kerSeg
+
+result <- CPD_STERGM(df, directed=FALSE, network_stats=c("edges", "triangles", "nodematch(\"node_attr\")"), 
+                     node_attr=node_status, list_of_lambda=10^c(0:4), threshold_alpha=0.025)
+
+
 gSeg_result <- Evaluation_gSeg(df, p_threshold=0.001, is_experiment=TRUE)
 kerSeg_result <- Evaluation_kerSeg(df, p_threshold=0.001, is_experiment=TRUE)
 rdpg_result <- Evaluation_RDPG(df, M=100, d=5, delta=5, is_experiment=TRUE)
@@ -127,6 +134,7 @@ seq_date <- rownames(market[start:end,]); tau <- length(seq_date)-1
 par(mar=c(4, 4, 2, 1), fig=c(0,1,0,0.66))
 plot(1:length(theta_change), theta_change, type='l',ylab="", xlab="", xaxt="n", yaxt="n")
 abline(h = threshold, col='red',lwd=2)
+title(ylab="Change magnitude")
 axis(side=1, at=xtick-2, labels = F, lwd = 0, lwd.ticks = 1)
 text(x=xtick-6,  par("usr")[3]-1.3, labels = seq_date[xtick], srt=45, cex=0.7, xpd=TRUE)
 
@@ -156,8 +164,8 @@ for(i in gSeg_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='gSeg', pos=2, xpd=TRUE, cex=0.8)
 
 
-df <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result)
-#save(df, file = 'Stock_result.Rdata') # Saved figure: 8 by 5
+stock_result <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result)
+#save(stock_result, file = 'Stock_result.Rdata') # Saved figure: 8 by 5
 
 
 
