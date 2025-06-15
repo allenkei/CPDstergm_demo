@@ -5,11 +5,14 @@ library(CPDstergm)
 source("EVAL.R")
 
 
+
+
 ######################
 # Simulation 1 (SBM) #
 ######################
 
 
+num_seq = 15
 num_node <- c(50, 100, 200)
 network_stats=c("edges", "mutual")
 
@@ -26,7 +29,7 @@ rdpg_result1 <- nbs_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  SBM_list <- sim_SBM_list(num_seq=10, n=num_node[i], rho=0.0)
+  SBM_list <- sim_SBM_list(num_seq, n=num_node[i], rho=0.0)
 
   sim_result <- CPD_STERGM_list(SBM_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result1[i,] <- colMeans(sim_result)
@@ -67,7 +70,7 @@ rdpg_result2 <- nbs_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  SBM_list <- sim_SBM_list(num_seq=10, n=num_node[i], rho=0.5)
+  SBM_list <- sim_SBM_list(num_seq, n=num_node[i], rho=0.5)
 
   sim_result <- CPD_STERGM_list(SBM_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result2[i,] <- colMeans(sim_result)
@@ -108,7 +111,7 @@ rdpg_result3 <- nbs_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  SBM_list <- sim_SBM_list(num_seq=10, n=num_node[i], rho=0.9)
+  SBM_list <- sim_SBM_list(num_seq, n=num_node[i], rho=0.9)
 
   sim_result <- CPD_STERGM_list(SBM_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result3[i,] <- colMeans(sim_result)
@@ -147,6 +150,7 @@ df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, 
 #################
 
 
+num_seq = 15
 num_node <- c(50, 100, 200)
 y1_target <- c(250, 500, 1000)
 network_stats=c("edges", "mutual")
@@ -161,7 +165,7 @@ rdpg_result1 <- nbs_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  STERGM_list <- sim_STERGM_list(num_seq=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
+  STERGM_list <- sim_STERGM_list(num_seq, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
 
   sim_result <- CPD_STERGM_list(STERGM_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result1[i,] <- colMeans(sim_result)
@@ -195,6 +199,7 @@ df <- list(result1, g_result1, ker_result1, g_stats_result1, ker_stats_result1, 
 #################
 
 
+num_seq = 15
 num_node <- c(50, 100, 200)
 y1_target <- c(500, 1400, 2500)
 network_stats=c("edges", "mutual", "triangles")
@@ -216,7 +221,7 @@ rdpg_result2 <- nbs_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  STERGM_list <- sim_STERGM_list(num_seq=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
+  STERGM_list <- sim_STERGM_list(num_seq, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
 
   sim_result <- CPD_STERGM_list(STERGM_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result2[i,] <- colMeans(sim_result)
@@ -250,6 +255,7 @@ df <- list(result2, g_result2, ker_result2, g_stats_result2, ker_stats_result2, 
 #################
 
 
+num_seq = 15
 num_node <- c(50, 100, 200)
 y1_target <- c(500, 1400, 2500)
 network_stats <- c("edges", "mutual", "triangles", "nodematch(\"node_attr\")")
@@ -274,7 +280,7 @@ rdpg_result3 <- nbs_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 for(i in 1:length(num_node)){
   set.seed(1)
   gender <- c(c("M", "F")[rbinom(num_node[i], 1, 0.5) + 1]) # fixed
-  STERGM_list <- sim_STERGM_list(num_seq=10, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i], node_attr=gender)
+  STERGM_list <- sim_STERGM_list(num_seq, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i], node_attr=gender)
 
   sim_result <- CPD_STERGM_list(STERGM_list, directed=TRUE, network_stats, node_attr=gender, list_of_lambda=10^c(0:4))
   result3[i,] <- colMeans(sim_result)
@@ -309,6 +315,7 @@ df <- list(result3, g_result3, ker_result3, g_stats_result3, ker_stats_result3, 
 
 
 source("EVAL.R")
+num_seq = 15
 num_node <- c(50, 100, 200)
 network_stats=c("edges", "mutual")
 
@@ -325,7 +332,7 @@ rdpg_result1 <- nbs_result1 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 10)
+  RDPG_list <- sim_RDPG_list(num_seq, n = num_node[i], rho = 0.9, d = 10)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result1[i,] <- colMeans(sim_result)
@@ -366,7 +373,7 @@ rdpg_result2 <- nbs_result2 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 15)
+  RDPG_list <- sim_RDPG_list(num_seq, n = num_node[i], rho = 0.9, d = 15)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result2[i,] <- colMeans(sim_result)
@@ -407,7 +414,7 @@ rdpg_result3 <- nbs_result3 <- matrix(NA, nrow=length(num_node), ncol=4)
 
 for(i in 1:length(num_node)){
   set.seed(1)
-  RDPG_list <- sim_RDPG_list(num_seq = 10, n = num_node[i], rho = 0.9, d = 20)
+  RDPG_list <- sim_RDPG_list(num_seq, n = num_node[i], rho = 0.9, d = 20)
   
   sim_result <- CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10^c(0:4))
   result3[i,] <- colMeans(sim_result)
