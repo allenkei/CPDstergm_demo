@@ -222,17 +222,11 @@ for(i in 1:length(num_node)){
   SBM_list <- sim_SBM_list(num_seq=3, n=num_node[i], rho=0.0)
   
   time1 <- system.time( CPD_STERGM_list(SBM_list, directed=TRUE, network_stats, list_of_lambda=100) )
-  
   time2 <- system.time( Evaluation_gSeg(SBM_list, p_threshold=0.05) )
-  
   time3 <- system.time( Evaluation_kerSeg(SBM_list, p_threshold=0.001) )
-  
   time4 <- system.time( Evaluation_gSeg_on_stats(SBM_list, p_threshold=0.05, num_stats=length(network_stats)) )
-  
   time5 <- system.time( Evaluation_kerSeg_on_stats(SBM_list, p_threshold=0.001, num_stats=length(network_stats)) )
-  
   time6 <- system.time( Evaluation_RDPG(SBM_list, M=50, d=5, delta=5) )
-  
   time7 <- system.time( Evaluation_NBS(SBM_list, M=15, delta=5) )
   
   SBM_time_by_node[,i] <- c(time1['elapsed'],time2['elapsed'],time3['elapsed'],time4['elapsed'],
@@ -260,17 +254,11 @@ for(i in 1:length(num_node)){
   STERGM_list <- sim_STERGM_list(num_seq=3, n=num_node[i], network_stats, coefs_pos, coefs_neg, y1_stats=y1_target[i])
   
   time1 <- system.time( CPD_STERGM_list(STERGM_list, directed=TRUE, network_stats, list_of_lambda=100) )
-  
   time2 <- system.time( Evaluation_gSeg(STERGM_list, p_threshold=0.05) )
-  
   time3 <- system.time( Evaluation_kerSeg(STERGM_list, p_threshold=0.001) )
-  
   time4 <- system.time( Evaluation_gSeg_on_stats(STERGM_list, p_threshold=0.05, num_stats=length(network_stats)) )
-  
   time5 <- system.time( Evaluation_kerSeg_on_stats(STERGM_list, p_threshold=0.001, num_stats=length(network_stats)) )
-  
   time6 <- system.time( Evaluation_RDPG(STERGM_list, M=50, d=5, delta=5) )
-  
   time7 <- system.time(Evaluation_NBS(STERGM_list, M=15, delta=5) )
   
   STERGM_time_by_node[,i] <- c(time1['elapsed'],time2['elapsed'],time3['elapsed'],time4['elapsed'],
