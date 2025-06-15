@@ -240,7 +240,7 @@ for(i in 1:length(num_node)){
   
 }
 
-#save(SBM_time_by_node, file = 'SBMrho0_time.Rdata')
+#save(SBM_time_by_node, file = 'time_SBMrho0.Rdata')
 
 
 
@@ -278,7 +278,7 @@ for(i in 1:length(num_node)){
   
 }
 
-#save(STERGM_time_by_node, file = 'STERGMp4_time.Rdata')
+#save(STERGM_time_by_node, file = 'time_STERGMp4.Rdata')
 
 
 
@@ -310,6 +310,6 @@ for(i in 1:length(num_node)){
   
 }
 
-#save(RDPGM_time_by_node, file = 'RDPGMd20_time.Rdata')
+#save(RDPGM_time_by_node, file = 'time_RDPGMd20.Rdata')
 
 
