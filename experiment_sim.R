@@ -5,8 +5,6 @@ library(CPDstergm)
 source("EVAL.R")
 
 
-
-
 ######################
 # Simulation 1 (SBM) #
 ######################
@@ -178,7 +176,6 @@ for(i in 1:length(num_node)){
   sim_result6 <- Evaluation_RDPG(STERGM_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(STERGM_list, M=15, delta=5)
 
-  
   final_results <- c(final_results, list(
     sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
   ))
@@ -226,7 +223,6 @@ for(i in 1:length(num_node)){
   sim_result6 <- Evaluation_RDPG(STERGM_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(STERGM_list, M=15, delta=5)
 
-  
   final_results <- c(final_results, list(
     sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
   ))
@@ -267,7 +263,6 @@ for(i in 1:length(num_node)){
   sim_result6 <- Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(RDPG_list, M=15, delta=5)
 
-  
   final_results <- c(final_results, list(
     sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
   ))
@@ -296,7 +291,6 @@ for(i in 1:length(num_node)){
   sim_result6 <- Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(RDPG_list, M=15, delta=5)
 
-  
   final_results <- c(final_results, list(
     sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
   ))
@@ -326,7 +320,6 @@ for(i in 1:length(num_node)){
   sim_result6 <- Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(RDPG_list, M=15, delta=5)
 
-  
   final_results <- c(final_results, list(
     sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
   ))
@@ -336,3 +329,19 @@ for(i in 1:length(num_node)){
 
 #save(final_results, file = 'RDPGd20.Rdata')
 
+
+###############
+# Print Table #
+###############
+load(file.choose()) #final_results
+iter <- 1 # 7 methods and 3 configurations
+
+means <- round(apply(final_results[[iter]], 2, mean), 2)
+sds   <- round(apply(final_results[[iter]], 2, sd), 2)
+
+formatted <- mapply(function(m, s) sprintf("$%.1f$ $(%.1f)$", m, s), means, sds)
+formatted[4] <- sprintf("$%.2f\\%%$", mean(final_results[[iter]][, 4]) * 100)
+
+latex_row <- paste0(paste(formatted, collapse = " & "), " \\\\")
+
+cat(latex_row)
