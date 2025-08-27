@@ -10,7 +10,7 @@ source("EVAL.R")
 ######################
 
 
-num_seq = 15
+num_seq <- 15
 num_node <- c(50, 100, 200)
 network_stats=c("edges", "mutual")
 
@@ -32,9 +32,11 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(SBM_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(SBM_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(SBM_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(SBM_list, num_stats=length(network_stats), M=30)
+  
 
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -62,9 +64,10 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(SBM_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(SBM_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(SBM_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(SBM_list, num_stats=length(network_stats), M=30)
 
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -90,9 +93,10 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(SBM_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(SBM_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(SBM_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(SBM_list, num_stats=length(network_stats), M=30)
   
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -131,9 +135,10 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(STERGM_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(STERGM_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(STERGM_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(STERGM_list, num_stats=length(network_stats), M=30)
   
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -175,9 +180,10 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(STERGM_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(STERGM_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(STERGM_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(STERGM_list, num_stats=length(network_stats), M=30)
 
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -222,9 +228,10 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(STERGM_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(STERGM_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(STERGM_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(STERGM_list, num_stats=length(network_stats), M=30)
 
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -238,7 +245,6 @@ for(i in 1:length(num_node)){
 ########################
 
 
-source("EVAL.R")
 num_seq = 15
 num_node <- c(50, 100, 200)
 network_stats=c("edges", "mutual")
@@ -262,9 +268,10 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(RDPG_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(RDPG_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(RDPG_list, num_stats=length(network_stats), M=30)
 
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -290,9 +297,10 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(RDPG_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(RDPG_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(RDPG_list, num_stats=length(network_stats), M=30)
 
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -319,9 +327,10 @@ for(i in 1:length(num_node)){
   sim_result5 <- Evaluation_kerSeg_on_stats(RDPG_list, p_threshold=0.001, num_stats=length(network_stats))
   sim_result6 <- Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5)
   sim_result7 <- Evaluation_NBS(RDPG_list, M=15, delta=5)
+  sim_result8 <- Evaluation_CPDker(RDPG_list, num_stats=length(network_stats), M=30)
 
   final_results <- c(final_results, list(
-    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7
+    sim_result1, sim_result2, sim_result3, sim_result4, sim_result5, sim_result6, sim_result7, sim_result8
   ))
   
 }
@@ -334,7 +343,7 @@ for(i in 1:length(num_node)){
 # Print Table #
 ###############
 load(file.choose()) #final_results
-iter <- 1 # 7 methods and 3 configurations
+iter <- 1 # 8 methods and 3 configurations
 
 means <- round(apply(final_results[[iter]], 2, mean), 2)
 sds   <- round(apply(final_results[[iter]], 2, sd), 2)

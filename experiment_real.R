@@ -29,13 +29,14 @@ gSeg_result <- Evaluation_gSeg_on_stats(MITphone, p_threshold=0.05, num_stats=3,
 kerSeg_result <- Evaluation_kerSeg_on_stats(MITphone, p_threshold=0.001, num_stats=3, is_experiment=TRUE)
 rdpg_result <- Evaluation_RDPG(MITphone, M=100, d=5, delta=5, is_experiment=TRUE)
 nbs_result <- Evaluation_NBS(MITphone, M=15, delta=7, is_experiment=TRUE)
+cpdker_result <- Evaluation_CPDker(MITphone, M=30, num_stats=3, is_experiment=TRUE)
 
 
 theta_change <- result$theta_change; threshold <- result$threshold; xtick <- result$est_CP
 seq_date <- seq(as.Date("2004-09-15"), as.Date("2005-05-04"), by="days"); tau <- length(seq_date)-1
 
 
-par(mar=c(4, 4, 2, 1), fig=c(0,1,0,0.66))
+par(mar=c(4, 4, 2, 1), fig=c(0,1,0,0.68))
 plot(1:length(theta_change), theta_change, type='l',ylab="", xlab="", xaxt="n", yaxt="n")
 title(ylab="Change magnitude")
 abline(h = threshold, col='red',lwd=2)
@@ -56,30 +57,34 @@ axis(side=2, at=ytick, labels = FALSE)
 text(par("usr")[1]-1.7, ytick, labels=ytick, pos=2, xpd=TRUE, cex=0.8)
 
 
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.61,0.66), new=T)
+plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
+for(i in cpdker_result){abline(v=i-1, col='blue', lwd=2)}
+text(par("usr")[1]+1, 0.45, labels='CPDker', pos=2, xpd=TRUE, cex=0.8)
 
-par(mar=c(0, 4, 0, 1), fig=c(0,1,0.59,0.66), new=T)
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.67,0.72), new=T)
 plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
 for(i in nbs_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='CPDnbs', pos=2, xpd=TRUE, cex=0.8)
 
-par(mar=c(0, 4, 0, 1), fig=c(0,1,0.67,0.74), new=T)
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.73,0.78), new=T)
 plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
 for(i in rdpg_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='CPDrdpg', pos=2, xpd=TRUE, cex=0.8)
 
-par(mar=c(0, 4, 0, 1), fig=c(0,1,0.75,0.82), new=T)
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.79,0.84), new=T)
 plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
 for(i in kerSeg_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='kerSeg', pos=2, xpd=TRUE, cex=0.8)
 
-par(mar=c(0, 4, 0, 1), fig=c(0,1,0.83,0.9), new=T)
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.85,0.9), new=T)
 plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
 for(i in gSeg_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='gSeg', pos=2, xpd=TRUE, cex=0.8)
 
 
 
-MIT_result <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result)
+MIT_result <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result, cpdker_result)
 #save(MIT_result, file = 'MITphone_result.Rdata') # Saved figure: 8 by 5
 
 
@@ -125,13 +130,14 @@ gSeg_result <- Evaluation_gSeg(df, p_threshold=0.001, is_experiment=TRUE)
 kerSeg_result <- Evaluation_kerSeg(df, p_threshold=0.001, is_experiment=TRUE)
 rdpg_result <- Evaluation_RDPG(df, M=100, d=5, delta=5, is_experiment=TRUE)
 nbs_result <- Evaluation_NBS(df, M=15, delta=7, is_experiment=TRUE)
+cpdker_result <- Evaluation_CPDker(df, M=30, num_stats=3, is_experiment=TRUE)
 
 
 
 theta_change <- result$theta_change; threshold <- result$threshold; xtick <- result$est_CP
 seq_date <- rownames(market[start:end,]); tau <- length(seq_date)-1
 
-par(mar=c(4, 4, 2, 1), fig=c(0,1,0,0.66))
+par(mar=c(4, 4, 2, 1), fig=c(0,1,0,0.68))
 plot(1:length(theta_change), theta_change, type='l',ylab="", xlab="", xaxt="n", yaxt="n")
 abline(h = threshold, col='red',lwd=2)
 title(ylab="Change magnitude")
@@ -143,28 +149,33 @@ axis(side=2, at=ytick, labels = FALSE)
 text(par("usr")[1]-1.7, ytick, labels=ytick, pos=2, xpd=TRUE, cex=0.8)
 
 
-par(mar=c(0, 4, 0, 1), fig=c(0,1,0.59,0.66), new=T)
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.61,0.66), new=T)
+plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
+for(i in cpdker_result){abline(v=i-1, col='blue', lwd=2)}
+text(par("usr")[1]+1, 0.45, labels='CPDker', pos=2, xpd=TRUE, cex=0.8)
+
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.67,0.72), new=T)
 plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
 for(i in nbs_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='CPDnbs', pos=2, xpd=TRUE, cex=0.8)
 
-par(mar=c(0, 4, 0, 1), fig=c(0,1,0.67,0.74), new=T)
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.73,0.78), new=T)
 plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
 for(i in rdpg_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='CPDrdpg', pos=2, xpd=TRUE, cex=0.8)
 
-par(mar=c(0, 4, 0, 1), fig=c(0,1,0.75,0.82), new=T)
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.79,0.84), new=T)
 plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
 for(i in kerSeg_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='kerSeg', pos=2, xpd=TRUE, cex=0.8)
 
-par(mar=c(0, 4, 0, 1), fig=c(0,1,0.83,0.9), new=T)
+par(mar=c(0, 4, 0, 1), fig=c(0,1,0.85,0.9), new=T)
 plot(NULL, ylim=c(0,1), xlim=c(1,tau), ylab="", xlab="", xaxt="n", yaxt="n")
 for(i in gSeg_result){abline(v=i-1, col='blue', lwd=2)}
 text(par("usr")[1]+1, 0.45, labels='gSeg', pos=2, xpd=TRUE, cex=0.8)
 
 
-stock_result <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result)
+stock_result <- list(result$est_CP, gSeg_result, kerSeg_result, rdpg_result, nbs_result, cpdker_result)
 #save(stock_result, file = 'Stock_result.Rdata') # Saved figure: 8 by 5
 
 

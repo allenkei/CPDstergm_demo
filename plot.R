@@ -213,7 +213,7 @@ ggplot(raster_data[raster_data$value == 1, ], aes(x = time, y = as.numeric(facto
 library(CPDstergm)
 source("EVAL.R")
 
-num_node <- c(50, 100, 200)
+num_node <- c(50, 100)
 network_stats=c("edges", "mutual")
 SBM_time_by_node <- matrix(NA, nrow=7, ncol=3)
 
@@ -228,9 +228,10 @@ for(i in 1:length(num_node)){
   time5 <- system.time( Evaluation_kerSeg_on_stats(SBM_list, p_threshold=0.001, num_stats=length(network_stats)) )
   time6 <- system.time( Evaluation_RDPG(SBM_list, M=50, d=5, delta=5) )
   time7 <- system.time( Evaluation_NBS(SBM_list, M=15, delta=5) )
+  time8 <- system.time( Evaluation_CPDker(SBM_list, M=30, num_stats=length(network_stats)) )
   
   SBM_time_by_node[,i] <- c(time1['elapsed'],time2['elapsed'],time3['elapsed'],time4['elapsed'],
-                            time5['elapsed'],time6['elapsed'],time7['elapsed'])
+                            time5['elapsed'],time6['elapsed'],time7['elapsed'],time8['elapsed'])
   
 }
 
@@ -240,8 +241,8 @@ for(i in 1:length(num_node)){
 
 
 
-num_node <- c(50, 100, 200)
-y1_target <- c(250, 500, 1000)
+num_node <- c(50, 100)
+y1_target <- c(250, 500)
 network_stats=c("edges", "mutual")
 coefs_pos <- matrix(c(-1, -1, -1, -1, -2, 1, -2, 1), nrow=2, ncol=4, byrow = T)
 coefs_neg <- matrix(c( -1, -1, -1, -1, -2, -1, -2, -1), nrow=2, ncol=4, byrow = T)
@@ -259,10 +260,11 @@ for(i in 1:length(num_node)){
   time4 <- system.time( Evaluation_gSeg_on_stats(STERGM_list, p_threshold=0.05, num_stats=length(network_stats)) )
   time5 <- system.time( Evaluation_kerSeg_on_stats(STERGM_list, p_threshold=0.001, num_stats=length(network_stats)) )
   time6 <- system.time( Evaluation_RDPG(STERGM_list, M=50, d=5, delta=5) )
-  time7 <- system.time(Evaluation_NBS(STERGM_list, M=15, delta=5) )
+  time7 <- system.time( Evaluation_NBS(STERGM_list, M=15, delta=5) )
+  time8 <- system.time( Evaluation_CPDker(STERGM_list, M=30, num_stats=length(network_stats)) )
   
   STERGM_time_by_node[,i] <- c(time1['elapsed'],time2['elapsed'],time3['elapsed'],time4['elapsed'],
-                               time5['elapsed'],time6['elapsed'],time7['elapsed'])
+                               time5['elapsed'],time6['elapsed'],time7['elapsed'],time8['elapsed'])
   
 }
 
@@ -271,7 +273,7 @@ for(i in 1:length(num_node)){
 
 
 
-num_node <- c(50, 100, 200)
+num_node <- c(50, 100)
 network_stats=c("edges", "mutual")
 RDPGM_time_by_node <- matrix(NA, nrow=7, ncol=3)
 
@@ -280,21 +282,16 @@ for(i in 1:length(num_node)){
   RDPG_list <- sim_RDPG_list(num_seq = 3, n = num_node[i], rho = 0.9, d = 20)
   
   time1 <- system.time( CPD_STERGM_list(RDPG_list, directed=TRUE, network_stats, list_of_lambda=10) )
-  
   time2 <- system.time( Evaluation_gSeg(RDPG_list, p_threshold=0.05) )
-  
   time3 <- system.time( Evaluation_kerSeg(RDPG_list, p_threshold=0.001) )
-  
   time4 <- system.time( Evaluation_gSeg_on_stats(RDPG_list, p_threshold=0.05, num_stats=length(network_stats)) )
-  
   time5 <- system.time( Evaluation_kerSeg_on_stats(RDPG_list, p_threshold=0.001, num_stats=length(network_stats)) )
-  
   time6 <- system.time( Evaluation_RDPG(RDPG_list, M=50, d=5, delta=5) )
-  
   time7 <- system.time( Evaluation_NBS(RDPG_list, M=15, delta=5) )
+  time8 <- system.time( Evaluation_CPDker(RDPG_list, M=30, num_stats=length(network_stats)) )
   
   RDPGM_time_by_node[,i] <- c(time1['elapsed'],time2['elapsed'],time3['elapsed'],time4['elapsed'],
-                              time5['elapsed'],time6['elapsed'],time7['elapsed'])
+                              time5['elapsed'],time6['elapsed'],time7['elapsed'],time8['elapsed'])
   
 }
 
